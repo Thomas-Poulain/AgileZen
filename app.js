@@ -1,14 +1,12 @@
 var createError = require('http-errors');
 var express = require('express');
-var session = require('express-session');
+var mongo = require('mongodb')
 var path = require('path');
 var logger = require('morgan');
 
 
 var indexRouter = require('./routes/index');
-var listUsers = require('./routes/listUsers');
-var connect = require('./routes/connect');
-var disconnect = require('./routes/disconnect');
+
 var app = express();
 
 
@@ -30,9 +28,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/listUsers',listUsers);
-app.use('/connect', connect);
-app.use('/disconnect', disconnect);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
