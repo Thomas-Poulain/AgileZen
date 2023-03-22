@@ -1,0 +1,70 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title SportTrack
+  link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css')
+  link(href='https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css' rel='stylesheet')
+  script(type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js')
+  link(rel='stylesheet' href='css/style.css')
+  link(href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet')
+  script(src="https://code.jquery.com/jquery-3.6.0.min.js")
+.col-xs-2.card-header-title.font-size-lg.text-capitalize.font-weight-normal.text-white.text-center.mt-4
+  h1.center SportTrack
+.app
+  .card.card-hover-shadow-2x.card.rounded
+    .card.d-flex.flex-column.justify-content-around.card-header-tab.card-header.widget-content-wrapper
+      .d-flex.flex-row.flex-wrap
+        .d-flex.flex-row
+          button.border-0.btn-transition.btn.btn-outline-primary(onclick="window.location.href = '/listUsers';") User List
+          button.border-0.btn-transition.btn.btn-outline-danger(onclick="window.location.href = '/disconnect';") Disconnect
+    .scroll-area-sm
+      perfect-scrollbar.ps-show-limits
+        table.table
+          thead.thead-dark.sticky-top
+            tr
+              th(scope='col') Date
+              th(scope='col') Description
+              th(scope='col') Distance
+              th(scope='col') Fr&eacute;quence minimale
+              th(scope='col') Fr&eacute;quence maximale
+          tbody
+            tr(v-for='activity in activities', @click='showDetails(activity)')
+              th(scope='row') {{activity.date}}
+              td {{activity.description}}
+              td {{activity.distance}}
+              td {{activity.freq_min}}
+              td {{activity.freq_max}}
+
+  #activityModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='activityModalLabel' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+      .modal-content
+        .modal-header
+          h5#activityModalLabel.modal-title {{selectedActivity.description}}
+          button.close(type='button' data-dismiss='modal' aria-label='Close')
+            span(aria-hidden='true') &times;
+        .modal-body
+          .card.card-hover-shadow-2x.card.rounded
+            .card.d-flex.flex-column.justify-content-around.card-header-tab.card-header.widget-content-wrapper
+              .scroll-area-sm
+                perfect-scrollbar.ps-show-limits
+                  table.table
+                    thead.thead-dark.sticky-top
+                      tr
+                        th(scope='col') Time
+                        th(scope='col') Cardio Frequency
+                        th(scope='col') Latitude
+                        th(scope='col') Longitude
+                        th(scope='col') Altitude
+                    tbody
+                      tr(v-for='detail in selectedActivity.data')
+                        th(scope='row') {{detail.time}}
+                        td {{detail.cardio_frequency}}
+                        td {{detail.latitude}}
+                        td {{detail.longitude}}
+                        td {{detail.altitude}}
+        .modal-footer
+          button.btn.btn-secondary(type='button' data-dismiss='modal') Fermer
+
+script(src='https://unpkg.com/vue@3/dist/vue.global.js')
+script(type='text/javascript' src='script_vues/index.js')
