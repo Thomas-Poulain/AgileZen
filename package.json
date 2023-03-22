@@ -1,11 +1,8 @@
 {
-  "name": "agilezen",
+  "name": "js_sporttrack",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
-  "bin": {
-    "agilezen": "bin/www.js"
-  },
+  "main": "index.js",
   "scripts": {
     "start": "node ./bin/www"
   },
