@@ -1,12 +1,23 @@
 {
-  "name": "bin",
+  "name": "agilezen",
   "version": "1.0.0",
   "description": "",
-  "main": "www.js",
+  "main": "app.js",
+  "bin": {
+    "agilezen": "bin/www.js"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Thomas-Poulain/AgileZen.git"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Thomas-Poulain/AgileZen/issues"
+  },
+  "homepage": "https://github.com/Thomas-Poulain/AgileZen#readme"
 }
