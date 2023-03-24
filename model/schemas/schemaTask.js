@@ -3,10 +3,10 @@ db.createCollection("tasks",
   "validator":{
     "$jsonSchema": {
       "bsonType": "object",
-      "required": ["project_id", "desc", "dateStart", "deadline", "status"],
+      "required": ["task_id", "desc", "dateStart", "deadline", "status"],
       "properties": { 
         "project_id": {
-          "bsonType":"objectId",
+          "bsonType":"number",
           "description": "The id of the task must be a objectId (required)."
         },
         "desc": {
