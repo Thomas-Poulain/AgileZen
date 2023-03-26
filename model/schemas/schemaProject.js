@@ -1,4 +1,4 @@
-db.createCollection("projets",
+db.createCollection("projects",
 {
     "validator": {
         "$jsonSchema": {
@@ -33,7 +33,7 @@ db.createCollection("projets",
                     "bsonType": "array",
                     "items": {
                         "bsonType": "object",
-                        "required": ["name", "task_id", "role"],
+                        "required": ["name", "role"],
                         "properties": {
                             "name": {
                                 "bsonType": "string",

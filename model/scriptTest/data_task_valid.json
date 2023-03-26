@@ -1,51 +1,53 @@
+db.tasks.insertMany(
 [
     {
-        "_id": ObjectId("621cd28d92cf8b0317e2e0c"),
+        "task_id": 1,
         "desc": "test 1",
-        "dateStart": "2022-01-01",
-        "deadline": "2022-03-31",
-        "status": "en cours"
+        "dateStart": ISODate("2023-03-21"),
+        "deadline": ISODate("2023-03-21"),
+        "status": "in progress"
     },
     {
-        "_id": ObjectId("621cd28d92cf8b0317e2e0l"),
-        "desc": "test 1",
+        "task_id": 2,
+        "desc": "test 2",
+        "dateStart": ISODate("2023-03-21"),
+        "deadline": ISODate("2023-03-22"),
+        "status": "close"
+    },
+    {
+        "task_id": 3,
+        "desc": "test 3",
         "dateStart": ISODate("2023-03-21T08:00:00.000Z"),
         "deadline": ISODate("2023-03-22T12:00:00.000Z"),
-        "status": "en cours"
+        "status": "close"
     },
     {
-        "_id": ObjectId("621cd28d92cf8b0317f2e0c"),
-        "desc": "test 1",
+        "task_id": 4,
+        "desc": "test 4",
         "dateStart": ISODate("2023-03-21T08:00:00.000Z"),
         "deadline": ISODate("2023-03-22T12:00:00.000Z"),
-        "status": "en cours"
+        "status": "close"
     },
     {
-        "_id": ObjectId("621cd28d92cf8b0315e2e0c"),
-        "desc": "test 1",
+        "task_id":5,
+        "desc": "test 5",
         "dateStart": ISODate("2023-03-21T08:00:00.000Z"),
         "deadline": ISODate("2023-03-22T12:00:00.000Z"),
-        "status": "en cours"
+        "status": "in progress"
     },
     {
-        "_id": ObjectId("621cd23d92cf8b0317e2e0c"),
+        "task_id": 6,
+        "desc": "test 6",
+        "dateStart": ISODate("2023-03-21T08:00:00.000Z"),
+        "deadline": ISODate("2023-03-22T12:00:00.000Z"),
+        "status": "close"
+    },
+    {
+        "task_id": 7,
         "desc": "Faire les courses",
         "dateStart": ISODate("2023-03-21T08:00:00.000Z"),
         "deadline": ISODate("2023-03-22T12:00:00.000Z"),
-        "status": "en cours"
-    },
-    {
-        "_id": ObjectId("621cd28d95cf8b0317e2e0c"),
-        "desc": "Faire les courses",
-        "dateStart": ISODate("2023-03-21T08:00:00.000Z"),
-        "deadline": ISODate("2023-03-22T12:00:00.000Z"),
-        "status": "en cours"
-    },
-    {
-        "_id": ObjectId("621cd28d92cf8b0367e2e0c"),
-        "desc": "Faire les courses",
-        "dateStart": ISODate("2023-03-21T08:00:00.000Z"),
-        "deadline": ISODate("2023-03-22T12:00:00.000Z"),
-        "status": "en cours"
+        "status": "close"
     }
-    ]
+]
+)
