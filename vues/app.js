@@ -2,10 +2,12 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
+var cors = require('cors');
 
-
-var projects = require('./routes/projects');
-var tasks = require('./routes/tasks');
+var indexRouter = require('./routes/index');
+var listUsers = require('./routes/listUsers');
+var connect = require('./routes/connect');
+var disconnect = require('./routes/disconnect');
 var app = express();
 
 
@@ -14,13 +16,19 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+app.use(cors({
+  origin: '*',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) cho
+}));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/project', projects);
-app.use('/task', tasks);
+app.use('/', indexRouter);
+app.use('/listUsers',listUsers);
+app.use('/connect', connect);
+app.use('/disconnect', disconnect);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

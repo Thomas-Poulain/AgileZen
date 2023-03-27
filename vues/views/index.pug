@@ -23,24 +23,24 @@ head
         table.table
           thead.thead-dark.sticky-top
             tr
-              th(scope='col') Date
+              th(scope='col') Title
               th(scope='col') Description
-              th(scope='col') Distance
-              th(scope='col') Fr&eacute;quence minimale
-              th(scope='col') Fr&eacute;quence maximale
+              th(scope='col') Start date
+              th(scope='col') End date
+              th(scope='col') Status
           tbody
-            tr(v-for='activity in activities', @click='showDetails(activity)')
-              th(scope='row') {{activity.date}}
-              td {{activity.description}}
-              td {{activity.distance}}
-              td {{activity.freq_min}}
-              td {{activity.freq_max}}
+            tr(v-for='project in projects', @click='showDetails(project)')
+              th(scope='row') {{project.name}}
+              td {{project.description}}
+              td {{project.startDate}}
+              td {{project.deadline}}
+              td {{project.status}}
 
   #activityModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='activityModalLabel' aria-hidden='true')
     .modal-dialog.modal-dialog-centered.modal-lg(role='document')
       .modal-content
         .modal-header
-          h5#activityModalLabel.modal-title {{selectedActivity.description}}
+          h5#activityModalLabel.modal-title {{selectedProject.description}}
           button.close(type='button' data-dismiss='modal' aria-label='Close')
             span(aria-hidden='true') &times;
         .modal-body
@@ -51,18 +51,12 @@ head
                   table.table
                     thead.thead-dark.sticky-top
                       tr
-                        th(scope='col') Time
-                        th(scope='col') Cardio Frequency
-                        th(scope='col') Latitude
-                        th(scope='col') Longitude
-                        th(scope='col') Altitude
+                        th(scope='col') Name
+                        th(scope='col') Role
                     tbody
-                      tr(v-for='detail in selectedActivity.data')
-                        th(scope='row') {{detail.time}}
-                        td {{detail.cardio_frequency}}
-                        td {{detail.latitude}}
-                        td {{detail.longitude}}
-                        td {{detail.altitude}}
+                      tr(v-for='employee in selectedProject.employee')
+                        th(scope='row') {{employee.name}}
+                        td {{employee.role}}
         .modal-footer
           button.btn.btn-secondary(type='button' data-dismiss='modal') Fermer
 

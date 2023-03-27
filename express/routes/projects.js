@@ -8,7 +8,7 @@ var MongoClient = require('mongodb').MongoClient;
     try {
       var client = await MongoClient.connect('mongodb://localhost:27017');
       var db = client.db('AgileZen');
-      var projectsCollection = db.collection('projets');
+      var projectsCollection = db.collection('projects');
       var projects = await projectsCollection.find().toArray();
       res.json(projects);
       client.close();
@@ -23,7 +23,7 @@ var MongoClient = require('mongodb').MongoClient;
     try {
       var client = await MongoClient.connect('mongodb://localhost:27017');
       var db = client.db('AgileZen');
-      var projectsCollection = db.collection('projets');
+      var projectsCollection = db.collection('projects');
       var id = req.params.id;
       var project = await projectsCollection.findOne({ _id: ObjectId(id) });
       res.json(project);
@@ -39,7 +39,7 @@ var MongoClient = require('mongodb').MongoClient;
     try {
       var client = await MongoClient.connect('mongodb://localhost:27017');
       var db = client.db('AgileZen');
-      var projectsCollection = db.collection('projets');
+      var projectsCollection = db.collection('projects');
       var newProject = req.body;//Peut être à changer en fonction du formulaire fait après
       var result = await projectsCollection.insertOne(newProject);
       res.json(result.ops[0]); // Renvoi du document ajouté avec l'ID généré par MongoDB
@@ -56,7 +56,7 @@ var MongoClient = require('mongodb').MongoClient;
     try {
       var client = await MongoClient.connect('mongodb://localhost:27017');
       var db = client.db('AgileZen');
-      var projectsCollection = db.collection('projets');
+      var projectsCollection = db.collection('projects');
       var id = req.params.id;
       var update = { $set: req.body }; //Peut être à changer en fonction du formulaire fait après
       var result = await projectsCollection.updateOne({ _id: ObjectId(id) }, update); 
@@ -100,7 +100,7 @@ var MongoClient = require('mongodb').MongoClient;
     try {
       var client = await MongoClient.connect('mongodb://localhost:27017');
       var db = client.db('AgileZen');
-      var projectsCollection = db.collection('projets');
+      var projectsCollection = db.collection('projects');
       var id = req.params.id;
       var result = await projectsCollection.deleteOne({ _id: ObjectId(id) }); // Suppression du projet correspondant à l'ID
       if (result.deletedCount === 1) {
@@ -120,7 +120,7 @@ var MongoClient = require('mongodb').MongoClient;
     try {
       var client = await MongoClient.connect('mongodb://localhost:27017');
       var db = client.db('AgileZen');
-      var projectsCollection = db.collection('projets');
+      var projectsCollection = db.collection('projects');
       var id = req.params.id;
       var result = await projectsCollection.deleteMany(); // Suppression du projet correspondant à l'ID
       res.json({ message: 'Projets supprimés avec succès' });
