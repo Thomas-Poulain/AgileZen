@@ -1,0 +1,83 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title SportTrack
+  link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css')
+  link(href='https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css' rel='stylesheet')
+  script(type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js')
+  link(rel='stylesheet' href='css/style.css')
+  link(href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet')
+.col-xs-2.card-header-title.font-size-lg.text-capitalize.font-weight-normal.text-white.text-center.mt-4
+  h1.center SportTrack
+.app
+  // Modal: Deal with the adding task popup
+  #formModal.modal.fade
+    .modal-dialog
+      .modal-content
+        .modal-header
+          h5#exampleModalLabel.modal-title Bienvenue
+          button.btn-close(data-mdb-dismiss='modal')
+        .modal-body
+            .col
+              .col.mb-4
+                | Email:
+                input#typeEmailX.form-control.form-control-lg(type='text' v-model='emailCreation' required='required')
+              .col.mb-4
+                | Nom:
+                input#typeTextX.form-control.form-control-lg(type='text' v-model='nom' required='required')
+              .col.mb-4
+                | Pr&eacute;nom:
+                input#typeTextX.form-control.form-control-lg(type='text' v-model='prenom' required='required')
+              .col.mb-4
+                | Date de naissance:
+                input#typeTextX.form-control.form-control-lg(type='date' v-model='dateNaissance' required='required')
+              .col.mb-4
+                | Sexe:
+                select.form-select.form-select-sm(v-model='sexe' aria-label='.form-select-sm example')
+                  option(selected='' value='M') Homme
+                  option(value='F') Femme
+                  option(value='A') Autre
+              .col.mb-4
+                | Poids:
+                input#typeTextX.form-control.form-control-lg(type='text' v-model='poids' required='required')
+              .col.mb-4
+                | Taille:
+                input#typeTextX.form-control.form-control-lg(type='text' v-model='taille' required='required')
+              .col.mb-4 
+                  label.form-label(for='typePasswordX') Mot de passe
+                  input#typePasswordX.form-control.form-control-lg(type='password' v-model='passwordCreation')
+            .modal-footer
+              button.btn.btn-secondary(data-mdb-dismiss='modal') Close
+              button.btn.btn-primary(@click="addUser") Create!
+              
+section.vh-50.gradient-custom
+  .container.py-5.h-100
+    .row.d-flex.justify-content-center.align-items-center.h-100
+      .col-12.col-md-8.col-lg-6.col-xl-5
+        .card.bg-dark.text-white(style='border-radius: 1rem;')
+          .card-body.p-5.text-center
+            .mb-md-5.mt-md-4.pb-5
+              h2.fw-bold.mb-2.text-uppercase Bonjour
+              p.text-red-50.mb-5= message
+              p.text-white-50.mb-5 Entrez votre email / mot de passe
+              form(action="/connect" method="post").form-outline.form-white.mb-4
+                .col
+                  .col.mb-4
+                    input#typeEmailX.form-control.form-control-lg(type='email' name='emailConnexion')
+                    label.form-label(for='typeEmailX') Email
+                  .col.mb-4
+                    input#typePasswordX.form-control.form-control-lg(type='password' name='pwdConnexion')
+                    label.form-label(for='typePasswordX') Mot de passe
+                  button.btn.btn-outline-light.btn-lg.px-5(type='submit') Connexion
+            div
+              p.mb-0
+                | Pas encore de compte ?
+            button.btn.btn-outline(data-mdb-toggle='modal' data-mdb-target='#formModal')
+              | Cr&eacute;er un compte
+            p
+            a(href="/listUsers") Retour à la page principale
+            a(href="/") Retour à la page principale
+script(src='https://unpkg.com/vue@3/dist/vue.global.js')
+script(src='https://unpkg.com/axios/dist/axios.min.js')
+script(type='text/javascript' src='script_vues/addUser.js')
