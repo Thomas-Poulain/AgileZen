@@ -18,15 +18,15 @@ db.createCollection("projects",
                     "description": "Project description must be a string and is (required)."
                 },
                 "startDate": {
-                    "bsonType": "date",
+                    "bsonType": "string",
                     "description": "The start date must be a date (required)."
                 },
                 "deadline": {
-                    "bsonType": "date",
+                    "bsonType": "string",
                     "description": "The dead line must be a date (required)."
                 },
                 "status": {
-                    "enum": ["in progress", "closed"],
+                    "enum": ["todo", "in progress", "closed"],
                     "description": "Status project must be either in progress either closed (required)."
                 },
                 "employee": {
@@ -41,7 +41,7 @@ db.createCollection("projects",
                             },
                             "role": {
                                 "enum": ["maintainer", "designer", "developer"],
-                                "description": "Role of the employee is either maintainer, either designer either developper (required)."
+                                "description": "Role of the employee is either maintainer, either designer either developer (required)."
                             }
                         }
                     }

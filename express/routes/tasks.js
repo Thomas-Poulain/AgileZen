@@ -18,22 +18,7 @@ var MongoClient = require('mongodb').MongoClient;
     }
   });
 
-  // Récupération d'une tâche par son id
-  router.get('/:id', async function(req, res) {
-    try {
-      var client = await MongoClient.connect('mongodb://localhost:27017');
-      var db = client.db('AgileZen');
-      var tasksCollection = db.collection('tasks');
-      var id = req.params.id;
-      var task = await tasksCollection.findOne({ _id: ObjectId(id) });
-      res.json(task);
-      client.close();
-    } catch(err) {
-      console.error(err);
-      res.status(500).send('Erreur serveur');
-    }
-  });
-
+  
   // Ajout d'une tâche
   router.post('/', async function(req, res) {
     try {

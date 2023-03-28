@@ -18,22 +18,6 @@ var MongoClient = require('mongodb').MongoClient;
     }
   });
 
-  // Récupération d'un projet par son id
-  router.get('/:id', async function(req, res) {
-    try {
-      var client = await MongoClient.connect('mongodb://localhost:27017');
-      var db = client.db('AgileZen');
-      var projectsCollection = db.collection('projects');
-      var id = req.params.id;
-      var project = await projectsCollection.findOne({ _id: ObjectId(id) });
-      res.json(project);
-      client.close();
-    } catch(err) {
-      console.error(err);
-      res.status(500).send('Erreur serveur');
-    }
-  });
-
   // Ajout d'un projet
   router.post('/', async function(req, res) {
     try {
@@ -42,7 +26,7 @@ var MongoClient = require('mongodb').MongoClient;
       var projectsCollection = db.collection('projects');
       var newProject = req.body;//Peut être à changer en fonction du formulaire fait après
       var result = await projectsCollection.insertOne(newProject);
-      res.json(result.ops[0]); // Renvoi du document ajouté avec l'ID généré par MongoDB
+      res.json(result.ops); // Renvoi du document ajouté avec l'ID généré par MongoDB
       client.close();
     } catch(err) {
       console.error(err);
@@ -116,7 +100,7 @@ var MongoClient = require('mongodb').MongoClient;
   });
 
   //Suppression de tous les projets
-  router.delete('/cleanAll', async function(req, res) {
+  router.delete('/', async function(req, res) {
     try {
       var client = await MongoClient.connect('mongodb://localhost:27017');
       var db = client.db('AgileZen');

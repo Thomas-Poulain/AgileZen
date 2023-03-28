@@ -1,0 +1,142 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title AgileZen
+  link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css')
+  link(href='https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css' rel='stylesheet')
+  script(type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js')
+  link(rel='stylesheet' href='css/style.css')
+  link(href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet')
+  script(src="https://code.jquery.com/jquery-3.6.0.min.js")
+
+body
+  .col-xs-2.card-header-title.font-size-lg.text-capitalize.font-weight-normal.text-white.text-center.mt-4
+    h1.center AgileZen
+  .app
+    // Modal: Deal with the adding task popup
+    #formModal.modal.fade
+      .modal-dialog
+        .modal-content
+          .modal-header
+            h5#exampleModalLabel.modal-title New task
+            button.btn-close(data-mdb-dismiss='modal')
+          .modal-body
+            form
+              .form-group
+                label(for='name') Project name
+                input#desc.form-control(type='text' v-model='name' required='required')
+              .form-group
+                label(for='dateStart') Start date
+                input#dateStart.form-control(type='date' v-model='startDate' required='required')
+              .form-group
+                label(for='deadline') Deadline
+                input#deadline.form-control(type='date' v-model='deadline' required='required')
+              .form-group
+                label(for='status') Status
+                select#status.form-control(name='status' v-model='status')
+                  option(selected='' value='todo') ToDo
+                  option(value='in progress') In progress
+                  option(value='closed') Closed
+              .form-group
+                label(for='description') Description
+                textarea#description.form-control(v-model='description' required='required')
+
+              .form-group
+                h6 Add employees
+                #employees-container
+                  .employee(v-for='(emp, index) in employee')
+                    .form-row
+                      .col-7
+                        label(for='employeeName') Employee name
+                        input.employee-name.form-control(type='text' placeholder='Enter employee name' v-model='emp.name' required='')
+                      .col-4
+                        label(for='employeeRole') Employee role
+                        select.employee-role.form-control(v-model='emp.role')
+                          option(value='maintainer') Maintainer
+                          option(value='developer') Developer
+                          option(value='designer') Designer
+                    button.btn.btn-primary.add-employee(v-if='index === employee.length - 1' type='button' @click='addEmployee')
+                      i.fa.fa-plus
+                    button.btn.btn-danger.remove-employee(v-if='employee.length > 1' type='button' @click='removeEmployee(index)' :disabled='employee.length === 1')
+                      i.fa.fa-minus              
+          .modal-footer
+            button.btn.btn-secondary(data-mdb-dismiss='modal') Close
+            button.btn.btn-primary(@click.prevent='submitForm' data-mdb-dismiss='modal') Add task
+    // The toDO list
+    .card.card-hover-shadow-2x.card.rounded
+      .card.d-flex.flex-column.justify-content-around.card-header-tab.card-header.widget-content-wrapper
+        // -Filters
+        .d-flex.flex-row.flex-wrap
+          .col-2
+            select.form-select.form-select-sm(name='progress' aria-label='.form-select-sm example' v-model='statusFilter')
+              option(value='')
+              option(value='in progress') In progress
+              option(value='todo') ToDo
+              option(value='closed') Closed
+          .col
+            span |
+            input(type='text' v-model='dateFilter' placeholder='Date')
+            span |  |ㅤ
+            input(type='text' v-model='keywordFilter' placeholder='Keyword')
+            span |
+          // -Buttons
+          .d-flex.flex-row
+            button.border-0.btn-transition.btn.btn-outline-success(@click='removeCompleted')
+              | ClosedTODO
+              i.fa.fa-trash
+            button.border-0.btn-transition.btn.btn-outline-danger(@click='deleteAll')
+              | All
+              i.fa.fa-trash
+          // Button trigger modal
+          button.btn.btn-primary(data-mdb-toggle='modal' data-mdb-target='#formModal')
+            | Add TaskTODO
+      .d-flex.flex-column.justify-content-around.flex-nowrap
+        // -Template card
+        .scroll-area-sm
+          perfect-scrollbar.ps-show-limits
+            table.table
+              thead.thead-dark.sticky-top
+                tr
+                  th(scope='col') Project name
+                  th(scope='col') Start date
+                  th(scope='col') End date
+                  th(scope='col') Status
+                  th(scope='col') #
+                  th(scope='col') #
+
+              tbody
+                tr(v-for='project in filters' :key="project._id", @click='showDetails(project)')
+                  th(scope='row') {{project.name}}
+                  td {{format(project.startDate)}}
+                  td {{format(project.deadline)}}
+                  td {{project.status}}
+
+    #activityModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='activityModalLabel' aria-hidden='true')
+      .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+        .modal-content
+          .modal-header
+            h5#activityModalLabel.modal-title Project: {{selectedProject.name}}
+            button.close(type='button' data-dismiss='#activityModal' aria-label='Close')
+              span(aria-hidden='true') &times;
+          .modal-body
+            .card.card-hover-shadow-2x.card.rounded
+              .card.d-flex.flex-column.justify-content-around.card-header-tab.card-header.widget-content-wrapper
+                p {{selectedProject.description}}
+                .scroll-area-sm
+                  perfect-scrollbar.ps-show-limits
+                    table.table
+                      thead.thead-dark.sticky-top
+                        tr
+                          th(scope='col') Name
+                          th(scope='col') Role
+                      tbody
+                        tr(v-for='employee in selectedProject.employee')
+                          th(scope='row') {{employee.name}}
+                          td {{employee.role}}
+          .modal-footer
+            button.btn.btn-secondary(type='button' data-dismiss='#activityModal') Fermer
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/mongodb/4.4.6/mongodb.min.js")
+  script(src='https://unpkg.com/vue@3/dist/vue.global.js')
+  script(src='https://unpkg.com/axios/dist/axios.min.js')
+  script(type='text/javascript' src='script_vues/findProject.js')

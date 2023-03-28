@@ -1,0 +1,37 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title SportTrack
+  link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css')
+  link(href='https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css' rel='stylesheet')
+  script(type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js')
+  link(rel='stylesheet' href='css/style.css')
+  link(href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet')
+  script(src="https://code.jquery.com/jquery-3.6.0.min.js")
+.col-xs-2.card-header-title.font-size-lg.text-capitalize.font-weight-normal.text-white.text-center.mt-4
+  h1.center SportTrack
+.app
+  .card.card-hover-shadow-2x.card.rounded
+    .card.d-flex.flex-column.justify-content-around.card-header-tab.card-header.widget-content-wrapper
+      .d-flex.flex-row.flex-wrap
+        .d-flex.flex-row
+          button.border-0.btn-transition.btn.btn-outline-primary(onclick="window.location.href = '/listUsers';") User List
+          button.border-0.btn-transition.btn.btn-outline-danger(onclick="window.location.href = '/disconnect';") Disconnect
+    .scroll-area-sm
+      perfect-scrollbar.ps-show-limits
+        table.table
+          thead.thead-dark.sticky-top
+            tr
+              th(scope='col') Description
+              th(scope='col') Start date
+              th(scope='col') End date
+              th(scope='col') Status
+          tbody
+            tr(v-for='task in tasks', @click='showDetails(task)')
+              th(scope='row') {{task.desc}}
+              td {{format(task.dateStart)}}
+              td {{format(task.deadline)}}
+              td {{task.status}}
+script(src='https://unpkg.com/vue@3/dist/vue.global.js')
+script(type='text/javascript' src='script_vues/findTask.js')
