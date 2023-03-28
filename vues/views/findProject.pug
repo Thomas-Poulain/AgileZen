@@ -82,15 +82,12 @@ body
             span |
           // -Buttons
           .d-flex.flex-row
-            button.border-0.btn-transition.btn.btn-outline-success(@click='removeCompleted')
-              | ClosedTODO
-              i.fa.fa-trash
             button.border-0.btn-transition.btn.btn-outline-danger(@click='deleteAll')
               | All
               i.fa.fa-trash
           // Button trigger modal
           button.btn.btn-primary(data-mdb-toggle='modal' data-mdb-target='#formModal')
-            | Add TaskTODO
+            | Add Task
       .d-flex.flex-column.justify-content-around.flex-nowrap
         // -Template card
         .scroll-area-sm
@@ -102,15 +99,25 @@ body
                   th(scope='col') Start date
                   th(scope='col') End date
                   th(scope='col') Status
-                  th(scope='col') #
-                  th(scope='col') #
+                  th(scope='col') 
+                  th(scope='col') 
+                  th(scope='col') 
 
               tbody
-                tr(v-for='project in filters' :key="project._id", @click='showDetails(project)')
+                tr(v-for='project in filters' :key="project._id")
                   th(scope='row') {{project.name}}
                   td {{format(project.startDate)}}
                   td {{format(project.deadline)}}
                   td {{project.status}}
+                  td
+                    button.border-0.btn-transition.btn.btn-success(@click='showDetails(project)')
+                      i.fa.fa-eye
+                  td 
+                    button.border-0.btn-transition.btn.btn-warning(@click='showDetails(project)')
+                      i.fa.fa-gears
+                  td 
+                    button.border-0.btn-transition.btn.btn-danger(@click='deleteProj(project)')
+                      i.fa.fa-trash
 
     #activityModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='activityModalLabel' aria-hidden='true')
       .modal-dialog.modal-dialog-centered.modal-lg(role='document')

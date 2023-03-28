@@ -41,7 +41,7 @@ var MongoClient = require('mongodb').MongoClient;
       var client = await MongoClient.connect('mongodb://localhost:27017');
       var db = client.db('AgileZen');
       var projectsCollection = db.collection('projects');
-      var id = req.params.id;
+      var id = parseInt(req.params.id);
       var update = { $set: req.body }; //Peut être à changer en fonction du formulaire fait après
       var result = await projectsCollection.updateOne({ _id: ObjectId(id) }, update); 
       if (result.modifiedCount === 1) {
@@ -56,37 +56,14 @@ var MongoClient = require('mongodb').MongoClient;
     }
   });
   
-
-  /**
-   Peut être chiant à faire
-
-  // Modification de plusieurs projets
-  router.put('/', async function(req, res) {
-    try {
-      var client = await MongoClient.connect('mongodb://localhost:27017');
-      var db = client.db('AgileZen');
-      var projectsCollection = db.collection('projets');
-      var filter = req.body.filter; // Filtre à appliquer pour sélectionner les projets à mettre à jour (encore une fois il pourrait venir à changer en fonction des vues)
-      var update = { $set: req.body.update }; // Données à mettre à jour (même commentaire)
-      var result = await projectsCollection.updateMany(filter, update);
-      res.json({ message: `${result.modifiedCount} projets ont été mis à jour` });
-      client.close();
-    } catch(err) {
-      console.error(err);
-      res.status(500).send('Erreur serveur');
-    }
-  });
-  
- */
-
   // Suppression d'un projet par identifiant
   router.delete('/:id', async function(req, res) {
     try {
       var client = await MongoClient.connect('mongodb://localhost:27017');
       var db = client.db('AgileZen');
       var projectsCollection = db.collection('projects');
-      var id = req.params.id;
-      var result = await projectsCollection.deleteOne({ _id: ObjectId(id) }); // Suppression du projet correspondant à l'ID
+      var idDel = parseInt(req.params.id);
+      var result = await projectsCollection.deleteOne({ _id: idDel }); // Suppression du projet correspondant à l'ID
       if (result.deletedCount === 1) {
         res.json({ message: 'Projet supprimé avec succès' });
       } else {

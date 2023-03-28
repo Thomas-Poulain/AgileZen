@@ -1,19 +1,5 @@
 /*
-    methods: {
-        addTask: function() {
-            this.tasks.push({
-                id:this.tasks.length + 1, 
-                desc: this.desc, 
-                startDate:this.format(this.startDate), 
-                deadline:this.format(this.deadline), 
-                status:this.status, 
-                priority:this.priority, 
-                completed:false
-            });
-        },
-        deleteAll: function(){
-            this.tasks = []
-        },
+
         removeTask: function(task){
             this.tasks = this.tasks.filter(t => t.id != task.id)
             //this.tasks.splice(task);
@@ -49,10 +35,10 @@ createApp({
             projects: [],
             selectedProject:"",
             url:"http://localhost:3000/project/",
-            name:"",
-            desc: "",
-            startDate: new Date(),
-            deadline: new Date(),
+            name:"New project",
+            description: "LoremIpsum",
+            startDate: "",
+            deadline: "",
             status: "todo",
             employee: [
                 { name: '', role: 'maintainer' }
@@ -136,6 +122,15 @@ createApp({
         removeEmployee: function(index) {
             this.employee.splice(index, 1);
         },
+        deleteProj: function(project){
+            console.log("test")
+            var id = project._id
+            console.log(id)
+            axios.delete((this.url+id)).then((response) => {
+                console.log(response.data)
+                this.updateDisplay()
+            })
+        },
         deleteAll: function(){
             axios.delete(this.url).then((response) => {
                 console.log(response.data)
@@ -143,15 +138,20 @@ createApp({
             })
         },
         submitForm: function() {
-            var isoStart = new Date(this.startDate).toISOString();
-            var isoEnd = new Date(this.deadline).toISOString();
-            
+
+            console.log(this.startDate)
+            if(this.startDate != ""){
+                this.startDate = new Date(this.startDate).toISOString();    
+            }
+            if(this.deadline != ""){
+                this.deadline = new Date(this.deadline).toISOString();    
+            }
             const formData = {
                 _id: this.searchId(),
                 name: this.name,
                 description: this.description,
-                startDate: isoStart,
-                deadline: isoEnd,
+                startDate: this.startDate,
+                deadline: this.deadline,
                 status: this.status,
                 employee: this.employee
                 };
