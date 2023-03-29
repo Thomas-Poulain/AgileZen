@@ -4,12 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "server": "concurrently --prefix-colors 'bgBlue.bold,bgMagenta.bold,bgGreen.bold' \"sh -c 'cd ../vues/ && npm start'\" \"sh -c 'cd ../ && mongod --dbpath=model/mongoData'\" \"sh -c 'npm start'\" ",
     "start": "node ./bin/www"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "concurrently": "^8.0.1",
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "mongodb": "^5.1.0",
