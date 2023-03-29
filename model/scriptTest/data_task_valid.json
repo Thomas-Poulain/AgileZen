@@ -1,52 +1,59 @@
 db.tasks.insertMany(
 [
     {
-        "task_id": 1,
+        "_id": 1, 
+        "project_id": 1,
         "desc": "test 1",
-        "dateStart": ISODate("2023-03-21"),
-        "deadline": ISODate("2023-03-21"),
+        "dateStart": "2023-03-21",  
+        "deadline": "2023-03-21",
         "status": "in progress"
     },
     {
-        "task_id": 2,
+        "_id": 2,
+        "project_id": 2,
         "desc": "test 2",
-        "dateStart": ISODate("2023-03-21"),
-        "deadline": ISODate("2023-03-22"),
+        "dateStart": "2023-03-21",
+        "deadline": "2023-03-22",
         "status": "close"
     },
     {
-        "task_id": 3,
+        "_id": 3,
+        "project_id": 3,
         "desc": "test 3",
-        "dateStart": ISODate("2023-03-21T08:00:00.000Z"),
-        "deadline": ISODate("2023-03-22T12:00:00.000Z"),
+        "dateStart": "2023-03-21T08:00:00.000Z",
+        "deadline": "2023-03-22T12:00:00.000Z",
         "status": "close"
     },
     {
-        "task_id": 4,
+        "_id": 4,
+        "project_id": 4,
         "desc": "test 4",
-        "dateStart": ISODate("2023-03-21T08:00:00.000Z"),
-        "deadline": ISODate("2023-03-22T12:00:00.000Z"),
+        "dateStart": "2023-03-21T08:00:00.000Z",
+        "deadline": "2023-03-22T12:00:00.000Z",
         "status": "close"
     },
     {
-        "task_id":5,
+        "_id":5,
+        "project_id": 5,
         "desc": "test 5",
-        "dateStart": ISODate("2023-03-21T08:00:00.000Z"),
-        "deadline": ISODate("2023-03-22T12:00:00.000Z"),
+        "dateStart": "2023-03-21T08:00:00.000Z",
+        "deadline": "2023-03-22T12:00:00.000Z",
         "status": "in progress"
     },
     {
-        "task_id": 6,
+        "_id": 6,
+        "project_id": 6,
         "desc": "test 6",
-        "dateStart": ISODate("2023-03-21T08:00:00.000Z"),
-        "deadline": ISODate("2023-03-22T12:00:00.000Z"),
+        "dateStart": "2023-03-21T08:00:00.000Z",
+        "deadline": "2023-03-22T12:00:00.000Z",
         "status": "close"
     },
     {
-        "task_id": 7,
+        "_id": 7,
+        "project_id": 7,
         "desc": "Faire les courses",
-        "dateStart": ISODate("2023-03-21T08:00:00.000Z"),
-        "deadline": ISODate("2023-03-22T12:00:00.000Z"),
+        "dateStart": "2023-03-21T08:00:00.000Z",
+        "deadline": "2023-03-22T12:00:00.000Z",
         "status": "close"
     }
 ]

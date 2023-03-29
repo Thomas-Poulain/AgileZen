@@ -1,19 +1,18 @@
 //Basic insertion in project:
 db.projets.insertOne({
+    "_id":1,
     "name": "Project 1 URGENT",
     "description": "Desc",
-    "startDate": ISODate("2022-01-01"),
-    "deadline": ISODate("2022-12-31"),
+    "startDate": "2022-01-01",
+    "deadline": "2022-12-31",
     "status": "in progress",
     "employee": [
         {
             "name": "Pierre",
-            "task_id": ObjectId("61f0e2b75bae321a9c65e138"),
-            "role": "developer"
+            "role": "developper"
         },
         {
             "name": "Jean",
-            "task_id": ObjectId("61f0e2b75bae321a9c65e139"),
             "role": "designer"
         }
     ]

@@ -104,42 +104,6 @@ db.projects.insertMany(
         "role": "developer"
       }
     ]
-  },
-  {
-    "_id": 8,
-    "name": "test 8",
-    "description": "test 8",
-    "startDate": "2022-05-01",
-    "deadline": "2022-10-31",
-    "status": "in progress",
-    "employee": [
-      {
-        "name": "Jane Smith",
-        "role": "designer"
-      },
-      {
-        "name": "Bob Johnson",
-        "role": "designer"
-      }
-    ]
-  },
-  {
-    "_id": 9,
-    "name": "test 9",
-    "description": "test 9",
-    "startDate": "2022-05-01",
-    "deadline": "2022-10-31",
-    "status": "in progress",
-    "employee": [
-      {
-        "name": "Jane Smith",
-        "role": "designer"
-      },
-      {
-        "name": "Bob Johnson",
-        "role": "designer"
-      }
-    ]
   }
 ]
 )
