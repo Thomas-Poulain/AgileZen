@@ -1,4 +1,4 @@
-# AgileZen / Thomas POULAIN, Tiutouan JAMET
+# AgileZen / Toma POULAIN, Titouan JAMET
 
 ### AgileZen c'est quoi ?
 
