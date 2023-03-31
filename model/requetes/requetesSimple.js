@@ -28,5 +28,5 @@ db.projets.findOne({_id: ObjectId("61f0e2b75bae321a9c65e140")})
 db.projets.find({ "status": "in progress" })
 
 //Search for all documents containing a substring (here all projects containing "URGENT" in the name)
-db.projects.find({ "name": /URGENT/ })
+db.projets.find({ "name": /URGENT/ })
 

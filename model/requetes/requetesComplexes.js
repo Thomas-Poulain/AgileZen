@@ -1,17 +1,6 @@
 //Aggregation query to calculate the total number of tasks for each project:
-db.projects.aggregate([
-  { $lookup: {
-      from: "tasks",
-      localField: "project_id",
-      foreignField: "_id",
-      as: "tasks"
-    }
-  },
-  { $project: {
-      name: 1,
-      totalTasks: { $size: "$tasks" }
-    }
-  }
+db.tasks.aggregate([
+  {$group: {_id: "$project_id", totalTasks: {$sum: 1}}}
 ])
 
 
@@ -30,6 +19,10 @@ db.tasks.aggregate([
       }
     }
   ])
+
+
+  db.projects.count()
+
 
 //Aggregation query to calculate the total number of tasks for each project:
 db.projets.aggregate([
@@ -88,5 +81,31 @@ db.projects.aggregate([
     }
   ])
   
+
+
+
+  db.tasks.aggregate([
+    {$match: {status: "in progress"}},
+    {$lookup: {from: "projects", localField: "project_id", foreignField: "_id", as: "project"}},
+    {$unwind: "$project"},
+    {$group: {_id: "$project._id", project: {$first: "$project"}}},
+    {$project: {_id: "$project._id", name: "$project.name"}}
+  ])
+
   
+  db.tasks.aggregate([
+    {$match: {status: "in progress", deadline: {$lt: new Date()}}},
+    {$lookup: {from: "projects", localField: "project_id", foreignField: "_id", as: "project"}},
+    {$unwind: "$project"},
+    {$group: {_id: "$project._id", project: {$first: "$project"}, lateTasks: {$push: "$$ROOT"}}},
+    {$project: {_id: "$project._id", name: "$project.name", lateTasks: 1}}
+  ])
+  
+  
+  
+  db.tasks.aggregate([
+    {$match: {status: "close"}},
+    {$project: {duration: {$subtract: [{$toDate: "$deadline"}, {$toDate: "$dateStart"}]}}},
+    {$group: {_id: "$_id", totalDuration: {$sum: "$duration"}}}
+  ])
   
